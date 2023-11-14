@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber"
 import { useGLTF } from "@react-three/drei"
 
 export default function Lunc({ position, scale }) {
-  const material = new MeshStandardMaterial({ roughness: 0.27, metalness: 1, color: 0xfcba03 })
+  const material = new MeshStandardMaterial({ roughness: 0.3, metalness: 1, color: 0xfcba03 })
   const { nodes } = useGLTF("/lunc.glb")
 
   const mesh = useRef()
