@@ -3,12 +3,10 @@ import { SphereGeometry, MeshStandardMaterial } from "three"
 import { useGLTF, useTexture } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import { useSpringValue, animated } from "@react-spring/three"
-import { station } from "../../state"
-import useSound from "use-sound"
 
-import sound from "/sounds/sound_13.mp3"
+// import useSound from "use-sound"
 
-station.Hud.Terra.material.set(new MeshStandardMaterial({ roughness: 0.25, metalness: 1, color: 0x0063ff }))
+// import sound from "/sounds/sound_13.mp3"
 
 const sphere = new SphereGeometry(1, 32, 32)
 const flags = ["us", "tw", "th", "sg", "se", "imf", "ph", "sj", "my", "mn", "kr", "jp", "in", "id", "hk", "sh", "eu", "dk", "cn", "ch", "ca", "au"]
@@ -17,12 +15,12 @@ export default function Terra({ position, material: _material, scale, onClick, a
   const [hovered, setHover] = useState(false)
   const { nodes } = useGLTF("/terra.glb")
   const explode = useSpringValue(0, { config: { mass: 1, friction: 15, tension: 350, clamp: true } })
-  const material = station.Hud.Terra.material.use()
+  const material = new MeshStandardMaterial({ roughness: 0.25, metalness: 1, color: 0x0063ff })
 
   const [rotation, setRotation] = useState(0)
   const flagRotation = useSpringValue(0, { config: { mass: 1, friction: 15, tension: 150, clamp: false } })
 
-  const [play] = useSound(sound, { volume: station.volume.use() })
+  // const [play] = useSound(sound, { volume: station.volume.use() })
 
   const group = useRef()
   useFrame((state, delta) => (group.current.rotation.y += delta * 0.5))
@@ -70,7 +68,7 @@ export default function Terra({ position, material: _material, scale, onClick, a
                 scale={Math.max(scale * 1.2, 100)}
                 rotation={90}
                 onClick={() => {
-                  play()
+                  // play()
                   flagRotation.start(rotation - 2)
                   setRotation((prev) => prev - 2)
                   setTimeout(() => {
@@ -83,7 +81,7 @@ export default function Terra({ position, material: _material, scale, onClick, a
                 scale={Math.max(scale * 1.2, 100)}
                 rotation={270}
                 onClick={() => {
-                  play()
+                  // play()
                   flagRotation.start(rotation + 2)
                   setRotation((prev) => prev + 2)
                   setTimeout(() => {
