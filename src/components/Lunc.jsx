@@ -1,10 +1,8 @@
 import { useRef } from "react"
-import { MeshStandardMaterial } from "three"
 import { useFrame } from "@react-three/fiber"
 import { useGLTF } from "@react-three/drei"
 
 export default function Lunc({ position, scale }) {
-  const material = new MeshStandardMaterial({ roughness: 0.3, metalness: 1, color: 0xfcba03 })
   const { nodes } = useGLTF("/lunc.glb")
 
   const mesh = useRef()
@@ -16,8 +14,12 @@ export default function Lunc({ position, scale }) {
     <group position={position} scale={scale}>
       <pointLight decay={0} distance={scale * 1.5} intensity={500} position={[0, 0, 0]} />
       <group ref={mesh} rotation={[0, -Math.PI / 2, Math.PI / 2]}>
-        <mesh material={material} geometry={nodes.Sphere.geometry} />
-        <mesh material={material} geometry={nodes.Sphere1.geometry} />
+        <mesh geometry={nodes.Sphere.geometry}>
+          <meshStandardMaterial roughness={0.3} metalness={1} color={0xfcba03} />
+        </mesh>
+        <mesh geometry={nodes.Sphere1.geometry}>
+          <meshStandardMaterial roughness={0.3} metalness={1} color={0xfcba03} />
+        </mesh>
       </group>
       <mesh>
         <sphereGeometry args={[1, 32, 32]} />
